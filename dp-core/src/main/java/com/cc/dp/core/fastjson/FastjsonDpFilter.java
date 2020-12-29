@@ -1,21 +1,25 @@
 package com.cc.dp.core.fastjson;
 
 import com.alibaba.fastjson.serializer.PropertyFilter;
-import com.cc.dp.core.adapter.DpAdapter;
-import com.cc.dp.core.key.DpKeyGenerator;
+import com.cc.dp.core.DpMatcher;
+import com.cc.dp.core.annotation.DpPoint;
 
-public class FastjsonDpFilter<K> implements PropertyFilter {
+public class FastjsonDpFilter implements PropertyFilter {
 
-    private DpKeyGenerator<K> dpKeyGenerator;
-    private DpAdapter<K> dpAdapter;
+    private DpMatcher dpMatcher;
 
-    public FastjsonDpFilter(DpKeyGenerator<K> dpKeyGenerator, DpAdapter<K> dpAdapter) {
-        this.dpKeyGenerator = dpKeyGenerator;
-        this.dpAdapter = dpAdapter;
+    public FastjsonDpFilter(DpMatcher dpMatcher) {
+        this.dpMatcher = dpMatcher;
     }
 
     @Override
     public boolean apply(Object object, String name, Object value) {
-        return false;
+        DpPoint dpPoint = object.getClass().getAnnotation(DpPoint.class);
+        if (dpPoint == null){
+            return false;
+        }
+        String node = object.getClass().getName();
+        String field = name;
+        return this.dpMatcher.match(node,field);
     }
 }
