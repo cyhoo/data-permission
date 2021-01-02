@@ -2,11 +2,16 @@ package com.cc.dp.core.filter;
 
 import com.cc.dp.core.DpPointProvider;
 import com.cc.dp.core.DpPointAuthenticationToken;
+import com.cc.dp.core.DpProvider;
 import com.cc.dp.core.annotation.DpPoint;
 
 public abstract class AbsDpFilter {
 
-    private DpPointProvider dpPointProvider;
+    private DpProvider dpProvider;
+
+    public AbsDpFilter(DpProvider dpProvider) {
+        this.dpProvider = dpProvider;
+    }
 
     protected boolean include(Object pojo, String field){
         DpPoint dpPoint = pojo.getClass().getAnnotation(DpPoint.class);
@@ -18,10 +23,8 @@ public abstract class AbsDpFilter {
             point = pojo.getClass().getName();
         }
         DpPointAuthenticationToken dpPointAuthenticationToken = new DpPointAuthenticationToken(point);
-        return this.dpPointProvider.authenticate(dpPointAuthenticationToken).include(field);
+        return this.dpProvider.authenticate(dpPointAuthenticationToken).include(field);
     }
 
-    public void setDpPointProvider(DpPointProvider dpPointProvider) {
-        this.dpPointProvider = dpPointProvider;
-    }
+
 }

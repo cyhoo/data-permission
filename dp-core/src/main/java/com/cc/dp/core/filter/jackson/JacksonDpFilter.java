@@ -1,5 +1,6 @@
 package com.cc.dp.core.filter.jackson;
 
+import com.cc.dp.core.DpProvider;
 import com.cc.dp.core.filter.AbsDpFilter;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -10,6 +11,10 @@ import com.fasterxml.jackson.databind.ser.PropertyFilter;
 import com.fasterxml.jackson.databind.ser.PropertyWriter;
 
 public class JacksonDpFilter extends AbsDpFilter implements PropertyFilter {
+
+    public JacksonDpFilter(DpProvider dpProvider) {
+        super(dpProvider);
+    }
 
     @Override
     public void serializeAsField(Object pojo, JsonGenerator jgen, SerializerProvider provider, PropertyWriter writer) throws Exception {
