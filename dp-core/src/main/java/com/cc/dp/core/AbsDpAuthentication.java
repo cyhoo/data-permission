@@ -1,25 +1,27 @@
 package com.cc.dp.core;
 
+import java.util.Collections;
+import java.util.Set;
+
 public abstract class AbsDpAuthentication implements DpAuthentication{
 
-    private DpToken dpToken;
-    private Object attache;
+    private Set<String> fields;
 
-    public void setDpToken(DpToken dpToken) {
-        this.dpToken = dpToken;
-    }
-
-    public void setAttache(Object attache) {
-        this.attache = attache;
-    }
-
-    @Override
-    public DpToken getPrincipal() {
-        return this.dpToken;
+    public AbsDpAuthentication(Set<String> fields) {
+        if (fields == null || fields.isEmpty()){
+            this.fields = Collections.emptySet();
+        }else {
+            this.fields = fields;
+        }
     }
 
     @Override
-    public Object getAttache() {
-        return this.attache;
+    public Set<String> getFields() {
+        return fields;
+    }
+
+    @Override
+    public boolean include(String field) {
+        return this.fields.contains(field);
     }
 }
