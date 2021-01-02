@@ -1,8 +1,7 @@
 package com.cc.dp.core.filter;
 
-import com.cc.dp.core.DpPointProvider;
 import com.cc.dp.core.DpPointAuthenticationToken;
-import com.cc.dp.core.DpProvider;
+import com.cc.dp.core.provider.DpProvider;
 import com.cc.dp.core.annotation.DpPoint;
 
 public abstract class AbsDpFilter {

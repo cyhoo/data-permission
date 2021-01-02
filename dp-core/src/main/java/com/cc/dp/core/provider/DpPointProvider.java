@@ -1,9 +1,10 @@
-package com.cc.dp.core;
+package com.cc.dp.core.provider;
 
+import com.cc.dp.core.*;
 import com.cc.dp.core.cache.DpPointCache;
 import com.cc.dp.core.cache.DpPointNullCache;
 
-public class DpPointProvider implements DpProvider{
+public class DpPointProvider implements DpProvider {
 
     private DpPointCache dpPointCache = new DpPointNullCache();
 
