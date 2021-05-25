@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/data-permission.iml" filepath="$PROJECT_DIR$/data-permission.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dp-core/dp-core.iml" filepath="$PROJECT_DIR$/dp-core/dp-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dp-spring-boot-start/dp-spring-boot-start.iml" filepath="$PROJECT_DIR$/dp-spring-boot-start/dp-spring-boot-start.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dp-spring-boot-start-simple/dp-spring-boot-start-simple.iml" filepath="$PROJECT_DIR$/dp-spring-boot-start-simple/dp-spring-boot-start-simple.iml" />
+    </modules>
+  </component>
+</project>
