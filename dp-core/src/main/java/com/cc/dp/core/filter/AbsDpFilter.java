@@ -1,29 +1,34 @@
 package com.cc.dp.core.filter;
 
-import com.cc.dp.core.DpPointAuthenticationToken;
+import com.cc.dp.core.DpPointInfo;
 import com.cc.dp.core.provider.DpProvider;
-import com.cc.dp.core.annotation.DpPoint;
+import com.cc.dp.core.provider.SimpleDpProvider;
 
-public abstract class AbsDpFilter {
+public abstract class AbsDpFilter implements DpFilter{
 
     private DpProvider dpProvider;
+
+    public AbsDpFilter() {
+        dpProvider = new SimpleDpProvider();
+    }
 
     public AbsDpFilter(DpProvider dpProvider) {
         this.dpProvider = dpProvider;
     }
 
-    protected boolean include(Object pojo, String field){
-        DpPoint dpPoint = pojo.getClass().getAnnotation(DpPoint.class);
-        if (dpPoint == null){
-            return false;
-        }
-        String point = dpPoint.value();
-        if (point.isEmpty()){
-            point = pojo.getClass().getName();
-        }
-        DpPointAuthenticationToken dpPointAuthenticationToken = new DpPointAuthenticationToken(point);
-        return this.dpProvider.authenticate(dpPointAuthenticationToken).include(field);
+    public DpProvider getDpProvider() {
+        return dpProvider;
     }
 
+    public void setDpProvider(DpProvider dpProvider) {
+        this.dpProvider = dpProvider;
+    }
 
+    @Override
+    public boolean include(DpPointInfo pointInfo) {
+        String point = buildPoint(pointInfo);
+        return this.dpProvider.contain(point);
+    }
+
+    protected abstract String buildPoint(DpPointInfo pointInfo);
 }
